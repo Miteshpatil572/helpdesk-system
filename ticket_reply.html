@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Ticket Reply</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="main">
+
+    <h2>Ticket Details</h2>
+
+    <div class="ticket-details">
+        <p><strong>Ticket No:</strong> {{ ticket['ticket_no'] }}</p>
+        <p><strong>User:</strong> {{ ticket['username'] }}</p>
+        <p><strong>Title:</strong> {{ ticket['title'] }}</p>
+        <p><strong>Category:</strong> {{ ticket['category'] }}</p>
+        <p><strong>Priority:</strong> {{ ticket['priority'] }}</p>
+        <p><strong>Status:</strong> {{ ticket['status'] }}</p>
+        <p><strong>Created:</strong> {{ ticket['created_at'] }}</p>
+        <p><strong>Description:</strong><br>{{ ticket['description'] }}</p>
+        {% if ticket['file'] %}
+            <p><strong>Attachment:</strong> <a href="/static/uploads/{{ ticket['file'] }}" target="_blank">{{ ticket['file'] }}</a></p>
+        {% endif %}
+    </div>
+
+    <div class="reply-box">
+
+        <h3>Conversation</h3>
+        {% for reply in replies %}
+        <div class="message">
+            <b>{{ reply[2] }}</b>
+            <p>{{ reply[3] }}</p>
+            <small>{{ reply[4] }}</small>
+        </div>
+        {% endfor %}
+
+    </div>
+
+    <form method="POST">
+
+        <textarea
+        name="message"
+        placeholder="Enter Reply"
+        required></textarea>
+
+        <button type="submit">
+            Send Reply
+        </button>
+
+    </form>
+
+    <p>
+        <a href="/tickets">Back to Tickets</a>
+    </p>
+
+</body>
+
+</html>
+

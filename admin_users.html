@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin User Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="sidebar">
+
+    <h2>Admin Panel</h2>
+
+    <a href="/dashboard">Dashboard</a>
+    <a href="/tickets">Manage Tickets</a>
+    <a href="/analytics">Analytics</a>
+    <a href="/admin">Admin Panel</a>
+    <a href="/profile">Profile</a>
+    <a href="/logout">Logout</a>
+
+</div>
+
+<div class="main">
+
+    <div class="topbar">
+        <h2>User Management</h2>
+    </div>
+
+    <div class="table-box">
+        <h3>Registered Users</h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user['id'] }}</td>
+                    <td>{{ user['name'] }}</td>
+                    <td>{{ user['email'] }}</td>
+                    <td>{{ user['role'] }}</td>
+                    <td>
+                        <a href="/admin/reset_user_password/{{ user['id'] }}">Reset Password</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>

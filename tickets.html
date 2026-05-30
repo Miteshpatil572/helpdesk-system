@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tickets</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="sidebar">
+
+    <h2>Help Desk</h2>
+
+    <a href="/dashboard">Dashboard</a>
+    <a href="/tickets">Tickets</a>
+
+    {% if role != 'admin' %}
+    <a href="/create_ticket">Create Ticket</a>
+    {% endif %}
+
+    <a href="/analytics">Analytics</a>
+
+    {% if role == 'admin' %}
+    <a href="/admin">Admin Panel</a>
+    <a href="/profile">Profile</a>
+    {% endif %}
+
+    <a href="/logout">Logout</a>
+
+</div>
+
+<div class="main">
+
+    <div class="topbar">
+        <h2>Ticket Management</h2>
+    </div>
+
+    <div class="table-box">
+
+        <h2>All Tickets</h2>
+
+        <table>
+
+            <tr>
+                <th>Ticket No</th>
+                <th>User</th>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Priority</th>
+                <th>Status</th>
+                <th>Created</th>
+                {% if role == 'admin' %}
+                <th>Actions</th>
+                {% endif %}
+            </tr>
+
+            {% for ticket in tickets %}
+            <tr>
+
+                <td>{{ ticket['ticket_no'] }}</td>
+                <td>{{ ticket['username'] }}</td>
+                <td>{{ ticket['title'] }}</td>
+                <td>{{ ticket['category'] }}</td>
+                <td>{{ ticket['priority'] }}</td>
+
+                <td>
+                    {% if ticket['status'] == 'Open' %}
+                    <span class="open">Open</span>
+
+                    {% elif ticket['status'] == 'In Progress' %}
+                    <span class="progress">In Progress</span>
+
+                    {% else %}
+                    <span class="closed">Closed</span>
+                    {% endif %}
+                </td>
+
+                <td>{{ ticket['created_at'] }}</td>
+
+                {% if role == 'admin' %}
+                <td>
+                    {% if ticket['status'] != 'Closed' %}
+                        <a class="action-button view" href="/ticket_reply/{{ ticket['id'] }}">View</a>
+                    {% endif %}
+                    {% if ticket['status'] == 'Open' %}
+                        <a class="action-button progress" href="/progress_ticket/{{ ticket['id'] }}">Mark In Progress</a>
+                        <a class="action-button close" href="/close_ticket/{{ ticket['id'] }}">Close</a>
+                    {% elif ticket['status'] == 'In Progress' %}
+                        <a class="action-button close" href="/close_ticket/{{ ticket['id'] }}">Close</a>
+                    {% else %}
+                        <span class="closed">Closed</span>
+                    {% endif %}
+                </td>
+                {% endif %}
+
+            </tr>
+            {% endfor %}
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>

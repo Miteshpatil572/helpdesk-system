@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="sidebar">
+
+    <h2>Admin</h2>
+
+    <a href="/dashboard">Dashboard</a>
+    <a href="/tickets">Tickets</a>
+    <a href="/analytics">Analytics</a>
+    <a href="/admin">Admin Panel</a>
+    <a href="/profile">Profile</a>
+    <a href="/logout">Logout</a>
+
+</div>
+
+<div class="main">
+
+    <div class="topbar">
+        <h2>Admin Profile</h2>
+    </div>
+
+    <div class="form-box">
+
+        <h3>Profile Information</h3>
+
+        <br>
+
+        <p><strong>Name:</strong> {{ session['user'] }}</p>
+
+        <br>
+
+        <p><strong>Role:</strong> {{ session['role'] }}</p>
+
+        <br><br>
+
+        <h3>Change Password</h3>
+
+        <form method="POST">
+
+            <label>New Password</label>
+
+            <input
+                type="password"
+                name="password"
+                required
+            >
+
+            <button type="submit">
+                Update Password
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

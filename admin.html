@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="sidebar">
+
+    <h2>Admin Panel</h2>
+
+    <a href="/dashboard">Dashboard</a>
+    <a href="/tickets">Manage Tickets</a>
+    <a href="/analytics">Analytics</a>
+    <a href="/admin">Admin Panel</a>
+    <a href="/profile">Profile</a>
+    <a href="/logout">Logout</a>
+
+</div>
+
+<div class="main">
+
+    <div class="topbar">
+        <h2>Administrator Dashboard</h2>
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Total Users</h3>
+            <p>{{ users }}</p>
+        </div>
+
+        <div class="card">
+            <h3>Total Tickets</h3>
+            <p>{{ tickets }}</p>
+        </div>
+
+        <div class="card">
+            <h3>Closed Tickets</h3>
+            <p>{{ closed }}</p>
+        </div>
+
+    </div>
+
+    <div class="table-box">
+
+        <h2>Admin Controls</h2>
+
+        <p style="margin-top:20px;">
+            ✓ View all users<br><br>
+            ✓ Manage tickets<br><br>
+            ✓ Reset user passwords<br><br>
+            ✓ Monitor analytics<br><br>
+            ✓ Control system operations
+        </p>
+
+        <p>
+            <a href="/admin/users">Manage Users & Reset Passwords</a>
+        </p>
+
+    </div>
+
+</div>
+
+</body>
+</html>

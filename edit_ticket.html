@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Edit Ticket</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+    <h2>Help Desk</h2>
+
+    <a href="/dashboard">Dashboard</a>
+
+    <a href="/analytics">Analytics</a>
+
+    <a href="/tickets">Tickets</a>
+
+    <a href="/create_ticket">Create Ticket</a>
+
+    {% if role == 'admin' %}
+
+    <a href="/admin">Admin Panel</a>
+
+    {% endif %}
+
+    <a href="/profile">Profile</a>
+
+    <a href="/logout">Logout</a>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+    <!-- TOPBAR -->
+
+    <div class="topbar">
+
+        <h2>Edit Ticket</h2>
+
+    </div>
+
+    <!-- FORM -->
+
+    <div class="table-box">
+
+        <form method="POST">
+
+            <label>Ticket Title</label>
+
+            <input
+            type="text"
+            name="title"
+            value="{{ ticket[3] }}"
+            required>
+
+            <label>Description</label>
+
+            <textarea
+            name="description"
+            rows="5"
+            required>{{ ticket[4] }}</textarea>
+
+            <label>Category</label>
+
+            <select name="category" required>
+
+                <option
+                {% if ticket[5] == 'Hardware Issue' %}
+                selected
+                {% endif %}>
+                Hardware Issue
+                </option>
+
+                <option
+                {% if ticket[5] == 'Software Issue' %}
+                selected
+                {% endif %}>
+                Software Issue
+                </option>
+
+                <option
+                {% if ticket[5] == 'Network Issue' %}
+                selected
+                {% endif %}>
+                Network Issue
+                </option>
+
+            </select>
+
+            <label>Priority</label>
+
+            <select name="priority" required>
+
+                <option
+                {% if ticket[6] == 'Low' %}
+                selected
+                {% endif %}>
+                Low
+                </option>
+
+                <option
+                {% if ticket[6] == 'Medium' %}
+                selected
+                {% endif %}>
+                Medium
+                </option>
+
+                <option
+                {% if ticket[6] == 'High' %}
+                selected
+                {% endif %}>
+                High
+                </option>
+
+            </select>
+
+            <button type="submit">
+
+                Update Ticket
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

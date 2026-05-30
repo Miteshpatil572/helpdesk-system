@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Assign Ticket</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="main">
+
+    <div class="form-box">
+
+        <h2>Assign Ticket</h2>
+
+        <form method="POST">
+
+            <label>Assign To</label>
+
+            <input
+            type="text"
+            name="assigned_to"
+            placeholder="Enter Admin Name"
+            required>
+
+            <button type="submit">
+
+                Assign Ticket
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Analytics</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="sidebar">
+
+    <h2>Help Desk</h2>
+
+    <a href="/dashboard">Dashboard</a>
+    <a href="/tickets">Tickets</a>
+
+    {% if session['role'] != 'admin' %}
+    <a href="/create_ticket">Create Ticket</a>
+    {% endif %}
+
+    <a href="/analytics">Analytics</a>
+
+    {% if session['role'] == 'admin' %}
+    <a href="/admin">Admin Panel</a>
+    <a href="/profile">Profile</a>
+    {% endif %}
+
+    <a href="/logout">Logout</a>
+
+</div>
+
+<div class="main">
+
+    <div class="topbar">
+        {% if role == 'admin' %}
+        <h2>Admin Analytics</h2>
+        {% else %}
+        <h2>Your Analytics</h2>
+        {% endif %}
+    </div>
+
+    <div class="analytics-container">
+
+        <div class="analytics-card">
+            <h3>Open Tickets</h3>
+            <p class="open">{{ open_count }}</p>
+        </div>
+
+        <div class="analytics-card">
+            <h3>In Progress</h3>
+            <p class="progress">{{ progress_count }}</p>
+        </div>
+
+        <div class="analytics-card">
+            <h3>Closed Tickets</h3>
+            <p class="closed">{{ closed_count }}</p>
+        </div>
+
+    </div>
+
+    <div class="chart-box">
+
+        <h2>Ticket Summary</h2>
+
+        <div class="charts-grid">
+
+            <div class="chart-card">
+                <h3>Status Distribution</h3>
+                <canvas id="pieChart"></canvas>
+            </div>
+
+            <div class="chart-card">
+                <h3>Tickets by Status</h3>
+                <canvas id="barChart"></canvas>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        loadPieChart({{ open_count }}, {{ progress_count }}, {{ closed_count }});
+        loadBarChart({{ open_count }}, {{ progress_count }}, {{ closed_count }});
+    });
+</script>
+
+</body>
+</html>

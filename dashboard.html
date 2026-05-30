@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="sidebar">
+
+    <h2>Help Desk</h2>
+
+    <a href="/dashboard">Dashboard</a>
+    <a href="/tickets">Tickets</a>
+
+    {% if role != 'admin' %}
+    <a href="/create_ticket">Create Ticket</a>
+    {% endif %}
+
+    <a href="/analytics">Analytics</a>
+
+    {% if role == 'admin' %}
+    <a href="/admin">Admin Panel</a>
+    <a href="/profile">Profile</a>
+    {% endif %}
+
+    <a href="/logout">Logout</a>
+
+</div>
+
+<div class="main">
+
+    <div class="topbar">
+        <h2>Welcome {{ username }}</h2>
+        <span>{{ role }}</span>
+    </div>
+
+    <div class="welcome-card">
+        <h1>Help Desk Dashboard</h1>
+        <p>Manage and track support tickets efficiently.</p>
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Total Tickets</h3>
+            <p>{{ total }}</p>
+        </div>
+
+        <div class="card">
+            <h3>Open</h3>
+            <p>{{ open_count }}</p>
+        </div>
+
+        <div class="card">
+            <h3>In Progress</h3>
+            <p>{{ progress_count }}</p>
+        </div>
+
+        <div class="card">
+            <h3>Closed</h3>
+            <p>{{ closed_count }}</p>
+        </div>
+
+    </div>
+
+    <div class="table-box">
+
+        {% if role == 'admin' %}
+        <h2>Team Recent Tickets</h2>
+        {% else %}
+        <h2>Your Recent Tickets</h2>
+        {% endif %}
+
+        <table>
+
+            <tr>
+                <th>Ticket No</th>
+                <th>Title</th>
+                <th>Priority</th>
+                <th>Status</th>
+            </tr>
+
+            {% if recent_tickets|length == 0 %}
+            <tr>
+                <td colspan="4" style="text-align:center; padding: 20px; color: #555;">
+                    No tickets to show.
+                </td>
+            </tr>
+            {% else %}
+            {% for ticket in recent_tickets %}
+            <tr>
+                <td>{{ ticket[1] }}</td>
+                <td>{{ ticket[3] }}</td>
+                <td>{{ ticket[6] }}</td>
+                <td>{{ ticket[7] }}</td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>{% block title %}{% endblock %}</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+    <h2>Help Desk</h2>
+
+    <a href="/dashboard">Dashboard</a>
+
+    <a href="/analytics">Analytics</a>
+
+    <a href="/tickets">Tickets</a>
+
+    <a href="/create_ticket">Create Ticket</a>
+
+    {% if session['role'] == 'admin' %}
+
+    <a href="/admin">Admin Panel</a>
+
+    {% endif %}
+
+    <a href="/profile">Profile</a>
+
+    <a href="/logout">Logout</a>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+    <!-- TOPBAR -->
+
+    <div class="topbar">
+
+        <h2>
+
+            {% block page_title %}
+            {% endblock %}
+
+        </h2>
+
+    </div>
+
+    <!-- PAGE CONTENT -->
+
+    {% block content %}
+
+    {% endblock %}
+
+</div>
+
+</body>
+
+</html>

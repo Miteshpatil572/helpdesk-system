@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Ticket</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="sidebar">
+
+    <h2>Help Desk</h2>
+
+    <a href="/dashboard">Dashboard</a>
+    <a href="/tickets">Tickets</a>
+    <a href="/create_ticket">Create Ticket</a>
+    <a href="/analytics">Analytics</a>
+    <a href="/logout">Logout</a>
+
+</div>
+
+<div class="main">
+
+    <div class="topbar">
+        <h2>Create New Ticket</h2>
+    </div>
+
+    <div class="form-box">
+
+        <form method="POST" enctype="multipart/form-data">
+
+            <label>Ticket Title</label>
+            <input type="text" name="title" required>
+
+            <label>Description</label>
+            <textarea name="description" rows="5" required></textarea>
+
+            <label>Attachment</label>
+            <input type="file" name="file">
+
+            <label>Category</label>
+            <select name="category" required>
+                <option value="">Select Category</option>
+                <option>Hardware</option>
+                <option>Software</option>
+                <option>Network</option>
+                <option>Printer</option>
+                <option>Email</option>
+                <option>Other</option>
+            </select>
+
+            <label>Priority</label>
+            <select name="priority" required>
+                <option value="">Select Priority</option>
+                <option>Low</option>
+                <option>Medium</option>
+                <option>High</option>
+            </select>
+
+            <button type="submit">
+                Submit Ticket
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

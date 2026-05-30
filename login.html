@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Help Desk Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="auth-container">
+
+    <h2>Help Desk Login</h2>
+
+    <form action="/login" method="POST" style="margin-top:12px;">
+
+        <label>Email</label>
+        <input type="email" name="email" required>
+
+        <label>Password</label>
+        <input type="password" name="password" required>
+
+        <button type="submit">Login</button>
+
+    </form>
+
+    <p style="margin-top:12px;">
+        Don't have an account?
+        <a href="/register">Register</a>
+    </p>
+
+</div>
+
+</body>
+</html>
